@@ -1,10 +1,16 @@
 const express = require('express');
-const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-//getting restaurants schema
-const Restaurant = require('./models/Restaurants');
+const app = express();
+
+//ROUTES
+//Restaurant Route
+const RestaurantRoute = require('./routes/Restaurants');
+
+//Use routes
+app.use('/restaurants', RestaurantRoute);
 
 
 //get keys from config
@@ -15,14 +21,7 @@ mongoose.connect(MongoDB.key, { useNewUrlParser: true })
 
 
 app.get('/', (req, res) => {
-    
-    //testing db
-    Restaurant.find({}, (err, data) => {
-        if(err) throw err;
-        else{
-            res.send(data)
-        }
-    }).limit(10);
+    res.send({title: "Welcome to my app"});
 });
 
 
