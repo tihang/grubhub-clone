@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
+import { Table, Input, Button } from 'reactstrap';
 import axios from 'axios';
 
 class SearchComponent extends Component {
@@ -40,12 +40,7 @@ class SearchComponent extends Component {
                 const title = 'Based on your Search Zip ' + this.state.value;
                 this.setState({ restaurants, title });
             });
-
-
-        
-
     }
-
 
 
     render() {
