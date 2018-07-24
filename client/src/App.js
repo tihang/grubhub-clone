@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import NavbarComponent from './components/NavbarComponent';
+import SearchComponent from './components/SearchComponent';
+import icon from '../src/logo.png'
 
 class App extends Component {
-  render() {
-    return (
+
+  render(){
+    return(
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <link rel="icon" href={icon} />
+      <NavbarComponent />
+      <SearchComponent />
       </div>
     );
   }
-}
 
+}
 export default App;
