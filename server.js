@@ -20,9 +20,9 @@ const MongoDB = require('./config/keys').MongoDB
 mongoose.connect(MongoDB.key, { useNewUrlParser: true })
 
 
-app.get('/', (req, res) => {
-    res.send({title: "Welcome to my app"});
-});
+// app.get('/', (req, res) => {
+//     res.send({title: "Welcome to my app"});
+// });
 
 //Server static assets if in porduction
 if(process.env.NODE_ENV == 'production'){
