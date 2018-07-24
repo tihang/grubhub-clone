@@ -14,18 +14,19 @@ app.use('/restaurants', RestaurantRoute);
 
 
 //get keys from config
-const Mongo_URI = require('./config/keys')
+const Mongo_URI = require('./config/keys').Mongo_URI;
 
-//database connect
+
 mongoose.connect(Mongo_URI, { useNewUrlParser: true })
+    .then(()=> console.log('DB connected'))
+    .catch(err => console.log(err));
 
-
-// app.get('/', (req, res) => {
-//     res.send({title: "Welcome to my app"});
-// });
+app.get('/', (req, res) => {
+    res.send({title: "Welcome to my app"});
+});
 
 //Server static assets if in porduction
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV == 'production'){
     //set static folder
     app.use(express.static('client/build'));
 
@@ -34,8 +35,6 @@ if(process.env.NODE_ENV === 'production'){
     })
 
     module.exports = require('./config/prod');
-}else{
-    module.exports = require('./config/keys')
 }
 
 
