@@ -1,7 +1,5 @@
-// production key configs
+// key configs
 
 module.exports =  {
-    'MongoDB': {
-        key: process.env.dbkey
-    }
+    Mongo_URI : process.env.Mongo_URI 
 }

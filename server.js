@@ -14,10 +14,10 @@ app.use('/restaurants', RestaurantRoute);
 
 
 //get keys from config
-const MongoDB = require('./config/keys').MongoDB
+const Mongo_URI = require('./config/keys')
 
 //database connect
-mongoose.connect(MongoDB.key, { useNewUrlParser: true })
+mongoose.connect(Mongo_URI, { useNewUrlParser: true })
 
 
 // app.get('/', (req, res) => {
@@ -34,6 +34,8 @@ if(process.env.NODE_ENV === 'production'){
     })
 
     module.exports = require('./config/prod');
+}else{
+    module.exports = require('./config/keys')
 }
 
 
