@@ -11,7 +11,7 @@ const app = express();
 const RestaurantRoute = require('./routes/Restaurants');
 
 //Use routes
-app.use('/restaurants', RestaurantRoute);
+app.use('/api/restaurants', RestaurantRoute);
 
 
 //get keys from config
@@ -24,7 +24,7 @@ mongoose.connect(Mongo_URI, { useNewUrlParser: true })
 
 
 // //Server static assets if in porduction
-if(process.env.NODE_ENV == 'production'){
+if(process.env.NODE_ENV === 'production'){
     //set static folder
     app.use(express.static('client/build'));
 

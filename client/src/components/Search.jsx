@@ -11,7 +11,7 @@ class Search extends Component {
     };
 
     getRandomRestaurants = () => {
-        axios.get('/restaurants/random')
+        axios.get('/api/restaurants/random')
         .then(res => {
             const restaurants = res.data;
             this.setState({ restaurants });
@@ -25,7 +25,7 @@ class Search extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-            axios.get('/restaurants/', {
+            axios.get('/api/restaurants/', {
                 params: {
                     zip: this.state.value,
                 }
