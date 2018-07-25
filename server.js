@@ -22,9 +22,6 @@ mongoose.connect(Mongo_URI, { useNewUrlParser: true })
     .then(()=> console.log('DB connected'))
     .catch(err => console.log(err));
 
-app.get('/', (req, res) => {
-    res.send({title: "Welcome to my app"});
-});
 
 // //Server static assets if in porduction
 if(process.env.NODE_ENV == 'production'){
@@ -35,8 +32,5 @@ if(process.env.NODE_ENV == 'production'){
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 }
-
-
-
 
 app.listen(PORT);
