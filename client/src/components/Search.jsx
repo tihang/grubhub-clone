@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Input, Button } from 'reactstrap';
 import axios from 'axios';
 
-class SearchComponent extends Component {
+class Search extends Component {
 
     state = {
         title: '',
@@ -10,14 +10,14 @@ class SearchComponent extends Component {
         restaurants: []
     };
 
-    componentDidMount() {
-        axios.get('/restaurants')
-            .then(res => {
-                const restaurants = res.data;
-                this.setState({ restaurants });
-                this.setState({ title : "This is a Randomly Generated List of NYC restaurants"})
-            });
-    }
+    getRandomRestaurants = () => {
+        axios.get('/restaurants/random')
+        .then(res => {
+            const restaurants = res.data;
+            this.setState({ restaurants });
+            this.setState({ title : "This is a Randomly Generated List of NYC restaurants"})
+        });
+    } 
 
     handleChange = (event) => {
         this.setState({ value: event.target.value });
@@ -25,12 +25,6 @@ class SearchComponent extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // axios.get('/restaurants/')
-        //     .then(res => {
-        //         const restaurants = res.data;
-        //         DisplayComponent.setState({ restaurants });
-        //         console.log(restaurants)
-        //     });
             axios.get('/restaurants/', {
                 params: {
                     zip: this.state.value,
@@ -49,6 +43,7 @@ class SearchComponent extends Component {
                 <h3>{this.state.title}</h3>
 
                 <Input type="number" value={this.state.value} placeholder="Enter Zip" onChange={this.handleChange.bind(this)}></Input>
+                <Button color='success' onClick={this.getRandomRestaurants}>Generate Random</Button>
                 <Button onClick={this.handleSubmit}>Search By Zip</Button>
 
                 <Table>
@@ -78,4 +73,4 @@ class SearchComponent extends Component {
     }
 }
 
-export default SearchComponent;
+export default Search;

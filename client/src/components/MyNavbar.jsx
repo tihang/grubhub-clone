@@ -13,7 +13,7 @@ import {
     DropdownMenu,
     DropdownItem } from 'reactstrap';
 
-class NavbarComponent extends Component{
+class MyNavbar extends Component{
     state = {
         isOpen : false
     }
@@ -25,12 +25,12 @@ class NavbarComponent extends Component{
     render(){
         return <div>
             <Navbar color="light" light expand="md">
-              <NavbarBrand href="/"><img style={{width: '50px', height:'50px'}}src={logo}></img></NavbarBrand>
+              <NavbarBrand href="/"><img alt="Cannot Load" style={{width: '50px', height:'50px'}}src={logo}></img></NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink href="/components/">Components</NavLink>
+                    <NavLink href="/search">Search</NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink href="https://github.com/tihang">
@@ -42,8 +42,8 @@ class NavbarComponent extends Component{
                       Options
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem>Option 1</DropdownItem>
-                      <DropdownItem>Option 2</DropdownItem>
+                      <DropdownItem>Under Construction</DropdownItem>
+                      <DropdownItem>Under Construction</DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem>Reset</DropdownItem>
                     </DropdownMenu>
@@ -56,4 +56,4 @@ class NavbarComponent extends Component{
 
 }
 
-export default NavbarComponent;
+export default MyNavbar;

@@ -6,11 +6,9 @@ const Restaurant = require('../models/Restaurants');
 
 //GET LIMIT 20 Restaurants 
 router.get('/', (req, res) => {
-    
     var query = {};
-
     //IF LOCATION QUERY IS PASSED
-    if (req.query.zip && req.query.zip != '') {
+    if (req.query.zip !== '') {
         var query = { 'address.zipcode': req.query.zip }
         Restaurant.find(query, (err, data) => {
             if (err) throw err;
@@ -19,27 +17,31 @@ router.get('/', (req, res) => {
             }
         }).limit(30);
     }
-    if (req.query.name) {
-        var regex = new RegExp(escapeRegex(req.query.name), "gi");
-        var query = { name: { $regex: regex } };
-        Restaurant.find(query, (err, data) => {
-            if (err) throw err;
-            else {
-                res.send(data);
-            }
-        });
-    }
-    else {
-        // IF NO QUERY IS PASSED GET RANDOMLY SELECTED RESTAURANTS
-        Restaurant.countDocuments().exec((err, count) => {
+});
+
+router.get('/byName', (req, res) =>{
+    var regex = new RegExp(escapeRegex(req.query.name), "gi");
+    var query = { name: { $regex: regex } };
+    Restaurant.find(query, (err, data) => {
+        if (err) throw err;
+        else {
+            res.send(data);
+        }
+    });
+});
+
+router.get('/random', (req, res) =>{
+        var query = {};
+         // IF NO QUERY IS PASSED GET RANDOMLY SELECTED RESTAURANTS
+          Restaurant.countDocuments().exec((err, count) => {
             // Get a random entry
             var random = Math.floor(Math.random() * count)
             // Again query all users but only fetch one offset by our random #
             Restaurant.find(query).limit(30).skip(random).exec((err, result) => {
+                if(err) throw err;
                 res.send(result)
             });
         });
-    }
 });
 
 //GET RESTAURANTS BY ZIP. LIMIT 20
