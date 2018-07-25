@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use('/restaurants', RestaurantRoute);
 
 
 //get keys from config
-const Mongo_URI = require('./config/keys').Mongo_URI;
+const Mongo_URI = process.env.Mongo_URI || require('./config/keys').Mongo_URI;
 
 
 mongoose.connect(Mongo_URI, { useNewUrlParser: true })
@@ -39,8 +40,6 @@ if(process.env.NODE_ENV == 'production'){
 }
 
 
-const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log("Server Started")
-});
+
+app.listen(PORT);
