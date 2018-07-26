@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/byName', (req, res) =>{
+router.get('/byName/', (req, res) =>{
     var regex = new RegExp(escapeRegex(req.query.name), "gi");
     var query = { name: { $regex: regex } };
     Restaurant.find(query, (err, data) => {
@@ -27,7 +27,7 @@ router.get('/byName', (req, res) =>{
         else {
             res.send(data);
         }
-    });
+    }).limit(20);
 });
 
 router.get('/random', (req, res) =>{
@@ -44,16 +44,16 @@ router.get('/random', (req, res) =>{
         });
 });
 
-//GET RESTAURANTS BY ZIP. LIMIT 20
-router.get('/:zip', (req, res) =>{
-    var query = {'address.zipcode' : req.params.zip}
-    Restaurant.find(query, (err, data) => {
-        if(err) throw err;
-        else{
-            res.send(data)
-        }
-    }).limit(20);
-});
+// //GET RESTAURANTS BY ZIP. LIMIT 20
+// router.get('/:zip', (req, res) =>{
+//     var query = {'address.zipcode' : req.params.zip}
+//     Restaurant.find(query, (err, data) => {
+//         if(err) throw err;
+//         else{
+//             res.send(data)
+//         }
+//     }).limit(30);
+// });
 
 //GET RESTAURANTS BY NAME. SEARCH API
 router.get('/search/', (req, res) =>{

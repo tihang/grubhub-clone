@@ -6,7 +6,8 @@ class Search extends Component {
 
     state = {
         title: '',
-        value: '',
+        zipValue: '',
+        nameValue: '',
         restaurants: []
     };
 
@@ -19,19 +20,36 @@ class Search extends Component {
         });
     } 
 
-    handleChange = (event) => {
-        this.setState({ value: event.target.value });
+    handleZipChange = (event) => {
+        this.setState({ zipValue: event.target.value });
+    }
+
+    handleSearchByName = (event) =>{
+        const query = event.target.value;
+        if(query.length > 1){
+            axios.get('/api/restaurants/byName/', {
+                params : {
+                    name : query
+                }
+            }).then(res => {
+                const restaurants = res.data;
+                const title = 'Based on your Search Name ' + this.state.value;
+                this.setState({ restaurants, title });
+            });
+        }
+
+
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
             axios.get('/api/restaurants/', {
                 params: {
-                    zip: this.state.value,
+                    zip: this.state.zipValue,
                 }
             }).then(res => {
                 const restaurants = res.data;
-                const title = 'Based on your Search Zip ' + this.state.value;
+                const title = 'Based on your Search Zip ' + this.state.zipValue;
                 this.setState({ restaurants, title });
             });
     }
@@ -46,7 +64,12 @@ class Search extends Component {
                 <Container>
                 <InputGroup size="lg">
                     <InputGroupAddon addonType="prepend">ZipCode:</InputGroupAddon>
-                    <Input value={this.state.value} onChange={this.handleChange.bind(this)} />
+                    <Input value={this.state.value} onChange={this.handleZipChange.bind(this)} />
+                </InputGroup>
+                <br/>
+                <InputGroup size="lg">
+                    <InputGroupAddon addonType="prepend">Type name to search by name</InputGroupAddon>
+                    <Input value={this.state.value} onKeyUp={this.handleSearchByName.bind(this)} />
                 </InputGroup>
                 </Container>
 
