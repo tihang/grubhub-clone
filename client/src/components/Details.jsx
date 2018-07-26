@@ -1,52 +1,42 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 import { Badge } from 'reactstrap';
-
+import MapContainer from './MapContainer';
 
 class Details extends PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
             id: props.match.params.id,
             name : '',
-            x : '',
-            y : ''
+            lat: '',
+            lng: ''
+            
         }
     }
 
-    componentDidMount(){
-        this.delayedShowMarker()
+    componentWillMount(){
         return (
             axios.get('/api/restaurants/findById/', {
                 params: { id: this.state.id }
             }).then(res => {
                 const name = res.data.name;
-                const x = res.data.x;
-                const y = res.data.y;
-                this.setState({ name, x, y });
+                const lat = res.data.x;
+                const lng = res.data.y; 
+                this.setState({ name, lat, lng});
             })
         );
     }
-    
-      delayedShowMarker = () => {
-        setTimeout(() => {
-          this.setState({ isMarkerShown: true })
-        }, 3000)
-      }
-    
-      handleMarkerClick = () => {
-        this.setState({ isMarkerShown: false })
-        this.delayedShowMarker()
-      }
 
   render() {
     return (
         <div>
             <br/><br/>
             <h1><Badge color="secondary">{this.state.name}</Badge></h1>
-            <h4><Badge color="secondary">{this.state.x}</Badge></h4>
-            <h4><Badge color="secondary">{this.state.y}</Badge></h4>
+            <h4><Badge color="secondary">{this.state.lat}</Badge></h4>
+            <h4><Badge color="secondary">{this.state.lng}</Badge></h4>
+
+            <MapContainer lat={this.state.lat} lng= {this.state.lng}/>
         </div>
     );
   }
@@ -55,3 +45,6 @@ class Details extends PureComponent {
 
 export default Details;
 
+// export default GoogleApiWrapper({
+//     apiKey: ("AIzaSyD7fWSBwp4mIiUC_02IQqC95KRwkoolRac")
+//   })(MapContainer)

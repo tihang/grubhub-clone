@@ -13,12 +13,7 @@ import {
 
 class MyNavbar extends Component {
   state = {
-    isOpen: false,
-    modal: false
-  }
-
-  toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+        modal: false
   }
 
   toggleModal = () => {
@@ -45,7 +40,7 @@ class MyNavbar extends Component {
         </Collapse>
       </Navbar>
       <Modal isOpen={this.state.modal} toggle={this.toggleModal.bind(this)}>
-        <ModalHeader toggle={this.toggle}>Sign In!</ModalHeader>
+        <ModalHeader toggle={this.toggleModal}>Sign In!</ModalHeader>
         <ModalBody>
           Sign in function coming soon.
             </ModalBody>
@@ -61,3 +56,5 @@ class MyNavbar extends Component {
 }
 
 export default MyNavbar;
+
+
