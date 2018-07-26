@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import MyNavbar from './components/MyNavbar';
 import Search from './components/Search';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import Details from './components/Details';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 
 
@@ -12,16 +13,12 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-
-            <Link to="/" ></Link>
             <Route component={MyNavbar} />
-            <Route component={Search} />
-            {/* <Route path="/home" exact component={MyNavbar} />
-            <Route path="/search" exact component={Search} /> */}
+            <Route path= "/search" component={Search} />
+            <Route path="/details/:id" exact strict component={Details} />
         </div>
       </Router>
     );
   }
-
 }
 export default App;

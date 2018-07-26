@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 //ENDPOINT FOR NAME REGEX SEARCH
-router.get('/byName/', (req, res) =>{
+router.get('/findByName/', (req, res) =>{
     var regex = new RegExp(escapeRegex(req.query.name), "gi");
     var query = { name: { $regex: regex } };
     Restaurant.find(query, (err, data) => {
@@ -70,6 +70,26 @@ router.get('/search/', (req, res) =>{
         });
     }
 });
+
+router.get('/findById/', (req, res) => {
+    const id = req.query.id;
+    const query = {_id : id};
+    Restaurant.findById(query, (err, data) => {
+        const name = data.name;
+        const x = data.address.coord[0];
+        const y = data.address.coord[1];
+        if (err) throw err;
+        else{
+            res.send({
+                name,
+                x,
+                y
+            });
+        }
+    });
+
+});
+
 
 //Safe regex against DDOS
 function escapeRegex(text) {
