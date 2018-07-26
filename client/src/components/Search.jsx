@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Input, Button } from 'reactstrap';
+import { Table, Input, Button, InputGroup, InputGroupAddon, Container } from 'reactstrap';
 import axios from 'axios';
 
 class Search extends Component {
@@ -40,12 +40,20 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <h3>{this.state.title}</h3>
+                <h2>Search among 25,359 restaurants in NYC</h2>
+                <br/>
+                <Button color='info' onClick={this.getRandomRestaurants}>Get Random from Database</Button><br/><br/>
+                <Container>
+                <InputGroup size="lg">
+                    <InputGroupAddon addonType="prepend">ZipCode:</InputGroupAddon>
+                    <Input value={this.state.value} onChange={this.handleChange.bind(this)} />
+                </InputGroup>
+                </Container>
 
-                <Input type="number" value={this.state.value} placeholder="Enter Zip" onChange={this.handleChange.bind(this)}></Input>
-                <Button color='success' onClick={this.getRandomRestaurants}>Generate Random</Button>
+                
+                <br />
                 <Button onClick={this.handleSubmit}>Search By Zip</Button>
-
+                <h3>{this.state.title}</h3>
                 <Table>
                     <thead>
                         <tr>
