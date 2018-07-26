@@ -4,12 +4,12 @@ const router = express.Router();
 //getting restaurants schema
 const Restaurant = require('../models/Restaurants');
 
-//GET LIMIT 20 Restaurants 
+//ENDPOINT FOR ZIP REGEX SEARCH
 router.get('/', (req, res) => {
-    var query = {};
     //IF LOCATION QUERY IS PASSED
+    var regex = new RegExp(escapeRegex(req.query.zip), "gi");
     if (req.query.zip !== '') {
-        var query = { 'address.zipcode': req.query.zip }
+        var query = { 'address.zipcode': { $regex: regex } }
         Restaurant.find(query, (err, data) => {
             if (err) throw err;
             else {
@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
     }
 });
 
+//ENDPOINT FOR NAME REGEX SEARCH
 router.get('/byName/', (req, res) =>{
     var regex = new RegExp(escapeRegex(req.query.name), "gi");
     var query = { name: { $regex: regex } };
@@ -27,9 +28,10 @@ router.get('/byName/', (req, res) =>{
         else {
             res.send(data);
         }
-    }).limit(20);
+    }).limit(30);
 });
 
+//FOR RANDOM 
 router.get('/random', (req, res) =>{
         var query = {};
          // IF NO QUERY IS PASSED GET RANDOMLY SELECTED RESTAURANTS

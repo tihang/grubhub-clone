@@ -21,7 +21,19 @@ class Search extends Component {
     } 
 
     handleZipChange = (event) => {
-        this.setState({ zipValue: event.target.value });
+        const query = event.target.value;
+        if(query.length >= 2){
+            axios.get('/api/restaurants/', {
+                params: {
+                    zip: query,
+                }
+            }).then(res => {
+                const restaurants = res.data;
+                const title = 'Based on your Search Zip ' + this.state.zipValue;
+                this.setState({ restaurants, title });
+            });
+        }
+
     }
 
     handleSearchByName = (event) =>{
@@ -33,7 +45,7 @@ class Search extends Component {
                 }
             }).then(res => {
                 const restaurants = res.data;
-                const title = 'Based on your Search Name ' + this.state.value;
+                const title = 'Based on your Search Name ' + this.state.nameValue;
                 this.setState({ restaurants, title });
             });
         }
@@ -41,18 +53,18 @@ class Search extends Component {
 
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-            axios.get('/api/restaurants/', {
-                params: {
-                    zip: this.state.zipValue,
-                }
-            }).then(res => {
-                const restaurants = res.data;
-                const title = 'Based on your Search Zip ' + this.state.zipValue;
-                this.setState({ restaurants, title });
-            });
-    }
+    // handleSubmit = (event) => {
+    //     event.preventDefault();
+    //         axios.get('/api/restaurants/', {
+    //             params: {
+    //                 zip: this.state.zipValue,
+    //             }
+    //         }).then(res => {
+    //             const restaurants = res.data;
+    //             const title = 'Based on your Search Zip ' + this.state.zipValue;
+    //             this.setState({ restaurants, title });
+    //         });
+    // }
 
 
     render() {
@@ -63,19 +75,19 @@ class Search extends Component {
                 <Button color='info' onClick={this.getRandomRestaurants}>Get Random from Database</Button><br/><br/>
                 <Container>
                 <InputGroup size="lg">
-                    <InputGroupAddon addonType="prepend">ZipCode:</InputGroupAddon>
-                    <Input value={this.state.value} onChange={this.handleZipChange.bind(this)} />
+                    <InputGroupAddon addonType="prepend">ZipCode</InputGroupAddon>
+                    <Input onKeyUp={this.handleZipChange.bind(this)} />
                 </InputGroup>
                 <br/>
                 <InputGroup size="lg">
-                    <InputGroupAddon addonType="prepend">Type name to search by name</InputGroupAddon>
-                    <Input value={this.state.value} onKeyUp={this.handleSearchByName.bind(this)} />
+                    <InputGroupAddon addonType="prepend">Name</InputGroupAddon>
+                    <Input onKeyUp={this.handleSearchByName.bind(this)} />
                 </InputGroup>
                 </Container>
 
                 
                 <br />
-                <Button onClick={this.handleSubmit}>Search By Zip</Button>
+                {/* <Button onClick={this.handleSubmit}>Search By Zip</Button> */}
                 <h3>{this.state.title}</h3>
                 <Table>
                     <thead>
