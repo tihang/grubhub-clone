@@ -10,33 +10,31 @@ class Details extends PureComponent {
             id: props.match.params.id,
             name : '',
             lat: '',
-            lng: ''
-            
+            lng: ''   
         }
     }
 
     componentWillMount(){
-        return (
-            axios.get('/api/restaurants/findById/', {
-                params: { id: this.state.id }
-            }).then(res => {
-                const name = res.data.name;
-                const lat = res.data.x;
-                const lng = res.data.y; 
-                this.setState({ name, lat, lng});
-            })
-        );
+        axios.get('/api/restaurants/findById/', {
+            params: { id: this.state.id }
+        }).then(res => {
+            const name = res.data.name;
+            const lat = res.data.y;
+            const lng = res.data.x; 
+            this.setState({ name, lat, lng});
+        })
+        
     }
 
   render() {
     return (
         <div>
             <br/><br/>
-            <h1><Badge color="secondary">{this.state.name}</Badge></h1>
+            <h1><Badge color="secondary">{this.state.name}</Badge></h1> 
             <h4><Badge color="secondary">{this.state.lat}</Badge></h4>
             <h4><Badge color="secondary">{this.state.lng}</Badge></h4>
 
-            <MapContainer lat={this.state.lat} lng= {this.state.lng}/>
+            <MapContainer lat={this.state.lat} lng={this.state.lng}/>
         </div>
     );
   }

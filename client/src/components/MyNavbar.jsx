@@ -13,11 +13,16 @@ import {
 
 class MyNavbar extends Component {
   state = {
-        modal: false
+        modal: false,
+        isOpen : false
   }
 
   toggleModal = () => {
     this.setState({ modal: !this.state.modal });
+  }
+
+  toggle = () =>{
+    this.setState({isOpen : !this.state.isOpen})
   }
 
   render() {
