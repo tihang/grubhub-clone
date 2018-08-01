@@ -11,12 +11,6 @@ export class MapContainer extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        if(this.props !== nextProps){
-            this.setState(nextProps)
-        }
-    }
-
     render(){
         return (
             <Map google={this.props.google}

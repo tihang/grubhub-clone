@@ -26,40 +26,38 @@ class MyNavbar extends Component {
   }
 
   render() {
-    return <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/"><img alt="Cannot Load" style={{ width: '50px', height: '50px' }} src={logo}></img></NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/search">Search</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/tihang">
-                GitHub
-                    </NavLink>
-            </NavItem>
-            <Button color="danger" onClick={this.toggleModal}>Sign in</Button>
-          </Nav>
-        </Collapse>
-      </Navbar>
-      <Modal isOpen={this.state.modal} toggle={this.toggleModal.bind(this)}>
-        <ModalHeader toggle={this.toggleModal}>Sign In!</ModalHeader>
-        <ModalBody>
-          Sign in function coming soon.
-            </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={this.toggleModal}>OK! Got it.</Button>{' '}
-          <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
-        </ModalFooter>
-      </Modal>
+    return (
+      <div className = "my-navbar">
+        <Navbar color="pink" light expand="md">
+          <NavbarBrand href="/"><img alt="Cannot Load" style={{ width: '150px', height: '150px' }} src={logo}></img></NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/search">Search Restaurants</NavLink>
+              </NavItem>
+              <NavItem>
+                <Button className='primary' onClick={this.toggleModal}>Join Us</Button>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
 
-    </div>;
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal.bind(this)}>
+          <ModalHeader toggle={this.toggleModal}>Sign In!</ModalHeader>
+          <ModalBody>
+            Sign in function coming soon.
+              </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggleModal}>OK! Got it.</Button>{' '}
+            <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+
+      </div>
+    );
   }
 
 }
 
 export default MyNavbar;
-
-
