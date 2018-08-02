@@ -78,12 +78,14 @@ router.get('/findById/', (req, res) => {
         const name = data.name;
         const x = data.address.coord[0];
         const y = data.address.coord[1];
+        const grades = data.grades;
         if (err) throw err;
         else{
             res.send({
                 name,
                 x,
-                y
+                y,
+                grades
             });
         }
     });

@@ -22,6 +22,9 @@ export class MapContainer extends Component {
                 className={'map'}
                 zoom={15}>
                 <Marker
+                 icon ={
+                    'http://mt.google.com/vt/icon?psize=27&font=fonts/Roboto-Bold.ttf&color=ff135C13&name=icons/spotlight/spotlight-waypoint-a.png&ax=43&ay=50&text=•&scale=2'
+                }
                     title={'The marker`s title will appear as a tooltip.'}
                     name={'SOMA'}
                     position={{ lat: this.state.lat , lng: this.state.lng }} />
