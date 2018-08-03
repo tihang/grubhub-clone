@@ -8,6 +8,7 @@
   "main": "server.js",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "concurrently": "^3.6.0",
     "dotenv": "^6.0.0",
@@ -16,6 +17,7 @@
     "google-maps-react": "^2.0.2",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.4",
+    "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "recompose": "^0.27.1"

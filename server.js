@@ -1,42 +1,26 @@
-const dotenv = require('dotenv');
-dotenv.config();
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
-
 const app = express();
-
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const passport = require('passport');
-const passportJWT = require('passport-jwt');
-const JwtStrategy = passportJWT.Strategy;
-const ExtractJwt = passportJWT.ExtractJwt;
+const morgan = require('morgan');
+
+//DEV DEPENDENCY
+app.use(morgan('dev'));
+
+//Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
-const opts = {
-    jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey : process.env.SECRET_OR_KEY
-}
-
-const strategy = new JwtStrategy(opts, (payload, next) => {
-    //TODO get user from DB
-    const user = null;
-    next(null, user);
-});
-
-passport.use(strategy);
-app.use(passport.initialize());
-
-
-
-//ROUTES
-//Restaurant Route
+//IMPORT ROUTES
 const RestaurantRoute = require('./routes/Restaurants');
+const AuthRoute = require('./routes/Auth');
 
-//Use routes
+//INCLUDE ROUTES
 app.use('/api/restaurants', RestaurantRoute);
-
+app.use('/api/auth', AuthRoute);
 
 //get keys from config
 const Mongo_URI = process.env.Mongo_URI || require('./config/keys').Mongo_URI;
