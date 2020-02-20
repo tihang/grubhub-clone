@@ -70,6 +70,3 @@ const GradesList = (props) =>{
         </Fragment>
     );
 }
-// export default GoogleApiWrapper({
-//     apiKey: ("AIzaSyD7fWSBwp4mIiUC_02IQqC95KRwkoolRac")
-//   })(MapContainer)
